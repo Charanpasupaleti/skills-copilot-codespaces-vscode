@@ -67,15 +67,15 @@ class DataProcessor {
         errors.push(`Field ${field} is required`);
       }
       
-      if (rules.type && typeof data[field] !== rules.type) {
+      if (data[field] !== undefined && rules.type && typeof data[field] !== rules.type) {
         errors.push(`Field ${field} must be of type ${rules.type}`);
       }
       
-      if (rules.min && data[field] < rules.min) {
+      if (data[field] !== undefined && rules.min !== undefined && data[field] < rules.min) {
         errors.push(`Field ${field} must be at least ${rules.min}`);
       }
       
-      if (rules.max && data[field] > rules.max) {
+      if (data[field] !== undefined && rules.max !== undefined && data[field] > rules.max) {
         errors.push(`Field ${field} must be at most ${rules.max}`);
       }
     }

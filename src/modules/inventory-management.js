@@ -93,7 +93,7 @@ class InventoryManagement {
   getLowStockItems() {
     const lowStock = [];
     
-    for (const [sku, item] of this.inventory.entries()) {
+    for (const item of this.inventory.values()) {
       if (item.quantity <= item.reorderPoint) {
         lowStock.push(item);
       }

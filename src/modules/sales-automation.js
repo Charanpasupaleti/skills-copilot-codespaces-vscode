@@ -122,7 +122,7 @@ class SalesAutomation {
   getHighPriorityLeads(minScore = 70) {
     const highPriority = [];
     
-    for (const [email, lead] of this.leads.entries()) {
+    for (const lead of this.leads.values()) {
       if (lead.score >= minScore) {
         highPriority.push(lead);
       }

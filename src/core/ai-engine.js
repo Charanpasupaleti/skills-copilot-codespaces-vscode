@@ -3,12 +3,24 @@ const logger = require('../utils/logger');
 
 class AIEngine {
   constructor(apiKey) {
-    this.client = new OpenAI({
-      apiKey: apiKey || process.env.OPENAI_API_KEY
-    });
+    const key = apiKey || process.env.OPENAI_API_KEY;
+    
+    if (!key) {
+      logger.warn('OpenAI API key not provided. AI features will be disabled.');
+      this.client = null;
+    } else {
+      this.client = new OpenAI({ apiKey: key });
+    }
+  }
+
+  checkClient() {
+    if (!this.client) {
+      throw new Error('AI Engine not initialized. Please provide an OpenAI API key.');
+    }
   }
 
   async analyzeBusinessProcess(processDescription) {
+    this.checkClient();
     try {
       logger.info('Analyzing business process...');
       const response = await this.client.chat.completions.create({
@@ -35,6 +47,7 @@ class AIEngine {
   }
 
   async makeDecision(context, options) {
+    this.checkClient();
     try {
       logger.info('Making AI-powered decision...');
       const prompt = `Given the following context: ${context}\n\nOptions: ${options.join(', ')}\n\nProvide the best decision and explain why.`;
@@ -63,6 +76,7 @@ class AIEngine {
   }
 
   async generateContent(type, specifications) {
+    this.checkClient();
     try {
       logger.info(`Generating ${type} content...`);
       const prompts = {
@@ -96,6 +110,7 @@ class AIEngine {
   }
 
   async extractInformation(document, fields) {
+    this.checkClient();
     try {
       logger.info('Extracting information from document...');
       const prompt = `Extract the following fields from this document: ${fields.join(', ')}\n\nDocument: ${document}`;

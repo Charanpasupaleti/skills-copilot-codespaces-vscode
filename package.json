@@ -1,0 +1,31 @@
+{
+  "name": "ai-business-automation",
+  "version": "1.0.0",
+  "description": "AI-powered business automation system for comprehensive business process management",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "lint": "eslint src/**/*.js"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "business",
+    "machine-learning",
+    "workflow"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "openai": "^4.20.1",
+    "express": "^4.18.2",
+    "winston": "^3.11.0",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0"
+  }
+}
